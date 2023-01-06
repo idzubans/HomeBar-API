@@ -1,6 +1,6 @@
 import { Controller, Request, Post, UseGuards, Get } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
-import { UsersService } from 'src/users/users.service';
+import { CommandBus } from '@nestjs/cqrs';
+import { CreateUserCommand } from 'src/users/commands/createUser/users.create.command';
 import { AuthService } from './auth.service';
 import { JwtAuthGuard } from './jwt-auth.guard';
 import { LocalAuthGuard } from './local-auth.guard';
@@ -9,7 +9,7 @@ import { LocalAuthGuard } from './local-auth.guard';
 export class AuthController {
   constructor(
     private authService: AuthService,
-    private userService: UsersService) { }
+    private commandBus: CommandBus) { }
 
   @Post('login')
   @UseGuards(LocalAuthGuard)
@@ -19,7 +19,9 @@ export class AuthController {
 
   @Post('register')
   async register(@Request() req) {
-    const user = await this.userService.createUser(req.body);
+    const user = await this.commandBus.execute(
+      new CreateUserCommand(req.body)
+    );
     const { password, ...result } = user;
     return result;
   }

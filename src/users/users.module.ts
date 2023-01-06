@@ -1,12 +1,21 @@
 import { Module } from '@nestjs/common';
-import { UsersService } from './users.service';
-import { UsersController } from './users.controller';
+import { CqrsModule } from '@nestjs/cqrs';
 import { PrismaModule } from 'src/prisma/prisma.module';
+import { CreateUserCommandHandler } from './commands/createUser/users.create.handler';
+import { GetUserByEmailQueryHandler } from './queries/getUserById/users.get-by-email.handler';
+
+export const CommandHandlers = [CreateUserCommandHandler];
+export const QueryHandlers =  [GetUserByEmailQueryHandler];
 
 @Module({
-  providers: [UsersService],
-  controllers: [UsersController],
-  exports: [UsersService],
-  imports: [PrismaModule],
+  providers: [
+    ...CommandHandlers,
+    ...QueryHandlers
+  ],
+  exports: [
+    ...CommandHandlers,
+    ...QueryHandlers
+  ],
+  imports: [CqrsModule, PrismaModule],
 })
 export class UsersModule {}
