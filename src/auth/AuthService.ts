@@ -2,7 +2,8 @@ import { Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { QueryBus } from '@nestjs/cqrs';
-import { GetUserByEmailQuery } from 'src/users/queries/getUserById/users.get-by-email.query';
+import { GetUserByEmailQuery } from 'src/users/queries/getUserById/GetUserByEmailQuery';
+import { AccessTokenDto } from './AccessTokenDto';
 
 @Injectable()
 export class AuthService {
@@ -21,14 +22,12 @@ export class AuthService {
     return await bcrypt.compare(password, user.password);
   }
 
-  async login(user: any) {
-    const payload = { username: user.email, sub: user.userId };
-    const {password, ...profile} = await this.queryBus.execute(
-      new GetUserByEmailQuery(user.email)
+  async getAccessToken(email: string): Promise<AccessTokenDto> {
+    const { password, ...profile } = await this.queryBus.execute(
+      new GetUserByEmailQuery(email)
     );
     return {
-      access_token: this.jwtService.sign(payload),
-      profile: profile
+      access_token: this.jwtService.sign({ profile }),
     };
   }
 }

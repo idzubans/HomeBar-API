@@ -1,4 +1,4 @@
-import { CreateUserPayloadDto } from "../../users.dto";
+import { CreateUserPayloadDto } from "./CreateUserPayloadDto";
 
 export class CreateUserCommand {
   Payload: CreateUserPayloadDto;
