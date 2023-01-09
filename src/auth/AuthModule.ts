@@ -5,7 +5,6 @@ import { JwtStrategy } from './guards/JwtStrategy';
 import { UsersModule } from '../users/UsersModule';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
-import { jwtConstants } from './Constants';
 import { CqrsModule } from '@nestjs/cqrs';
 
 @Module({
@@ -13,7 +12,7 @@ import { CqrsModule } from '@nestjs/cqrs';
     UsersModule,
     PassportModule,
     JwtModule.register({
-      secret: jwtConstants.secret,
+      secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '1d' },
     }),
     CqrsModule

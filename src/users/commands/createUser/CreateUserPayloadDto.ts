@@ -3,7 +3,7 @@ import { UserRole } from "src/users/UserRoleEnum";
 export class CreateUserPayloadDto {
   email: string;
   password: string;
-  name: string;
-  surname: string;
+  firstName: string;
+  lastName: string;
   role: UserRole;
 }

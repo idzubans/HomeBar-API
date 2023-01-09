@@ -12,8 +12,8 @@ export class GetUserByEmailQueryHandler implements IQueryHandler<GetUserByEmailQ
     return {
       id: response.id,
       email: response.email,
-      name: response.name,
-      surname: response.surname,
+      firstName: response.firstName,
+      lastName: response.lastName,
       role: response.role,
       password: response.password
     };

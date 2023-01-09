@@ -4,7 +4,7 @@ export class GetUserDto {
   id: string;
   email: string;
   password: string;
-  name: string;
-  surname: string;
+  firstName: string;
+  lastName: string;
   role: UserRole;
 }

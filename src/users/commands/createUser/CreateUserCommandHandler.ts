@@ -12,8 +12,8 @@ export class CreateUserCommandHandler implements ICommandHandler<CreateUserComma
     const result = await this.prisma.user.create({
       data: {
         email: command.Payload.email,
-        name: command.Payload.name,
-        surname: command.Payload.surname,
+        firstName: command.Payload.firstName,
+        lastName: command.Payload.lastName,
         role: command.Payload.role,
         password: await hash(command.Payload.password, 10)
       }
@@ -21,9 +21,9 @@ export class CreateUserCommandHandler implements ICommandHandler<CreateUserComma
 
     return {
       email: result.email,
-      name: result.name,
+      firstName: result.firstName,
       id: result.id,
-      surname: result.surname,
+      lastName: result.lastName,
       role: result.role
     };
   }
