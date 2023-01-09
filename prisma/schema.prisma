@@ -88,34 +88,34 @@ enum Role {
 }
 
 enum Color {
-  Red
-  Green
-  Yellow
-  Blue
-  Orange
-  Brown
-  White
-  Pink
-  Purple
-  Black
+  RED
+  GREEN
+  YELLOW
+  BLUE
+  ORANGE
+  BROWN
+  WHITE
+  PINK
+  PURPLE
+  BLACK
 }
 
 enum GlassType {
-  HighBall
-  LowBall
-  Martini
-  Margarita
-  Coup
+  HIGH_BALL
+  LOW_BALL
+  MARTINI
+  MARGARITA
+  COUP
 }
 
 enum MeasurementUnit {
-  Oz
-  Ml
-  Dash
-  Slice
-  Peel
-  Whole
-  Spoon
+  OZ
+  ML
+  DASH
+  SLICE
+  PEEL
+  WHOLE
+  SPOON
 }
 
 enum OrderStatus {
