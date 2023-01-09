@@ -26,6 +26,7 @@ export class AuthService {
     const { password, ...profile } = await this.queryBus.execute(
       new GetUserByEmailQuery(email)
     );
+    
     return {
       access_token: this.jwtService.sign({ profile }),
     };
