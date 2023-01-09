@@ -1,4 +1,4 @@
-export class GetAllIngredientsDto {
+export class IngredientDto {
   id: string;
   name: string;
   imageUrl: string;

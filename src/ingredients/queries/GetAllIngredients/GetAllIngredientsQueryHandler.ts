@@ -1,13 +1,13 @@
 import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
+import { IngredientDto } from "src/ingredients/IngredientDto";
 import { PrismaService } from "src/prisma/PrismaService";
-import { GetAllIngredientsDto } from "./GetAllIngredientsDto";
 import { GetAllIngredientsQuery } from "./GetAllIngredientsQuery";
 
 @QueryHandler(GetAllIngredientsQuery)
-export class GetAllIngredientsQueryHandler implements IQueryHandler<GetAllIngredientsQuery> {
+export class GetAllIngredientsQueryHandler implements IQueryHandler<GetAllIngredientsQuery, IngredientDto[]> {
   constructor(private prisma: PrismaService) { }
 
-  async execute(query: GetAllIngredientsQuery): Promise<GetAllIngredientsDto[]> {
+  async execute(query: GetAllIngredientsQuery): Promise<IngredientDto[]> {
     const response = await this.prisma.ingredient.findMany({ include: { bartenders: { select: { id: true } } } });
     return response.map(ingredient => {
       return {
