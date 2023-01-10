@@ -4,9 +4,10 @@ import { PrismaModule } from 'src/prisma/PrismaModule';
 import { CreateDrinkCommandhandler } from './commands/CreateDrink/CreateDrinkCommandHandler';
 import { UpdateDrinkCommandhandler } from './commands/UpdateDrink/UpdateDrinkCommandHandler';
 import { DrinksController } from './DrinksController';
+import { GetDrinkByIdQueryHandler } from './queries/GetById/GetDrinkByIdQueryHandler';
 
 export const CommandHandlers = [CreateDrinkCommandhandler, UpdateDrinkCommandhandler];
-export const QueryHandlers = [];
+export const QueryHandlers = [GetDrinkByIdQueryHandler];
 
 @Module({
   providers: [
