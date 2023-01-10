@@ -6,6 +6,8 @@ import { DrinkPayloadDto } from './commands/DrinkPayloadDto';
 import { UpdateDrinkCommand } from './commands/UpdateDrink/UpdateDrinkCommand';
 import { DrinkDto } from './DrinkDto';
 import { GetDrinkByIdQuery } from './queries/GetById/GetDrinkByIdQuery';
+import { SearchDrinksQuery } from './queries/Search/SearchDrinksQuery';
+import { SearchParamsDto } from './queries/Search/SearchParamsDto';
 
 @Controller('drinks')
 export class DrinksController {
@@ -34,6 +36,14 @@ export class DrinksController {
   async GetDrinkById(@Param() params): Promise<DrinkDto> {
     return await this.queryBus.execute(
       new GetDrinkByIdQuery(params.id)
+    );
+  }
+
+  @Post('search')
+  @UseGuards(JwtAuthGuard)
+  async SearchDrinks(@Body() body: SearchParamsDto): Promise<DrinkDto[]> {
+    return await this.queryBus.execute(
+      new SearchDrinksQuery(body)
     );
   }
 }
