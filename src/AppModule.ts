@@ -6,9 +6,18 @@ import { AuthController } from './auth/AuthController';
 import { IngredientsModule } from './ingredients/IngredientsModule';
 import { CqrsModule } from '@nestjs/cqrs';
 import { DrinksModule } from './drinks/DrinksModule';
+import { PartyModule } from './party/PartyModule';
 
 @Module({
-  imports: [AuthModule, UsersModule, PrismaModule, IngredientsModule, CqrsModule, DrinksModule],
+  imports: [
+    AuthModule, 
+    PrismaModule, 
+    CqrsModule, 
+    UsersModule, 
+    IngredientsModule, 
+    DrinksModule,
+    PartyModule
+  ],
   controllers: [AuthController],
 })
 export class AppModule {}
