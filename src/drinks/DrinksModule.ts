@@ -2,9 +2,10 @@ import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { PrismaModule } from 'src/prisma/PrismaModule';
 import { CreateDrinkCommandhandler } from './commands/CreateDrink/CreateDrinkCommandHandler';
+import { UpdateDrinkCommandhandler } from './commands/UpdateDrink/UpdateDrinkCommandHandler';
 import { DrinksController } from './DrinksController';
 
-export const CommandHandlers = [CreateDrinkCommandhandler];
+export const CommandHandlers = [CreateDrinkCommandhandler, UpdateDrinkCommandhandler];
 export const QueryHandlers = [];
 
 @Module({

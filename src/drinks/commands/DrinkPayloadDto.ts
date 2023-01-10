@@ -2,7 +2,7 @@ import { DrinkColor } from "src/drinks/DrinkColorEnum";
 import { GlassType } from "src/drinks/GlassTypeEnum";
 import { MeasurementUnit } from "src/drinks/MeasurementUnitEnum";
 
-export class CreateDrinkPayloadDto {
+export class DrinkPayloadDto {
   ingredients: RecipePartPayloadDto[];
   name: string;
   imageUrl: string;

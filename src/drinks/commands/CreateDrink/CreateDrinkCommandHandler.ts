@@ -66,7 +66,13 @@ export class CreateDrinkCommandhandler implements ICommandHandler<CreateDrinkCom
       color: created.color,
       glass: created.glass,
       categories: created.categories,
-      ingredients: created.ingredients.map(x => { return { name: x.ingredient.name, id: x.ingredient.id, amount: x.amount, unit: x.unit } })
+      ingredients: created.ingredients.map(x => { 
+        return { 
+          name: x.ingredient.name, 
+          id: x.ingredient.id, 
+          amount: x.amount, 
+          unit: x.unit } 
+        })
     }
   }
 }
