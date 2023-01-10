@@ -2,6 +2,7 @@ import { Decimal } from "@prisma/client/runtime";
 import { DrinkColor } from "./DrinkColorEnum";
 import { GlassType } from "./GlassTypeEnum";
 import { MeasurementUnit } from "./MeasurementUnitEnum";
+import { DrinkCategoryDto } from "./queries/GetDrinkCategories/DrinkCategoryDto";
 
 export class DrinkDto {
   id: string;
@@ -10,7 +11,7 @@ export class DrinkDto {
   tutorialUrl: string;
   color: DrinkColor;
   glass: GlassType;
-  categories: CategoryDto[];
+  categories: DrinkCategoryDto[];
   ingredients: RecipePartDto[];
 }
 
@@ -19,9 +20,4 @@ class RecipePartDto {
   name: string;
   amount: Decimal;
   unit: MeasurementUnit;
-}
-
-class CategoryDto {
-  id: string;
-  name: string;
 }

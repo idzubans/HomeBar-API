@@ -22,11 +22,11 @@ export class PartyController {
     );
   }
 
-  @Get('/:id')
+  @Get(':id')
   @UseGuards(JwtAuthGuard)
-  async GetById(@Param() params): Promise<PartyDto> {
+  async GetById(@Param('id') id: string): Promise<PartyDto> {
     return await this.queryBus.execute(
-      new GetPartyByIdQuery(params.id)
+      new GetPartyByIdQuery(id)
     );
   }
 

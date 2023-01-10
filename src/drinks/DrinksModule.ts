@@ -5,10 +5,11 @@ import { CreateDrinkCommandhandler } from './commands/CreateDrink/CreateDrinkCom
 import { UpdateDrinkCommandhandler } from './commands/UpdateDrink/UpdateDrinkCommandHandler';
 import { DrinksController } from './DrinksController';
 import { GetDrinkByIdQueryHandler } from './queries/GetById/GetDrinkByIdQueryHandler';
+import { GetDrinkCategoriesQueryHandler } from './queries/GetDrinkCategories/GetDrinkCategoriesQueryHandler';
 import { SearchDrinksQueryHandler } from './queries/Search/SearchDrinksQueryHandler';
 
 export const CommandHandlers = [CreateDrinkCommandhandler, UpdateDrinkCommandhandler];
-export const QueryHandlers = [GetDrinkByIdQueryHandler, SearchDrinksQueryHandler];
+export const QueryHandlers = [GetDrinkByIdQueryHandler, SearchDrinksQueryHandler, GetDrinkCategoriesQueryHandler];
 
 @Module({
   providers: [
