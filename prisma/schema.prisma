@@ -1,0 +1,126 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Drink {
+  id          String       @id @default(uuid())
+  name        String       @unique
+  imageUrl    String
+  tutorialUrl String?
+  color       Color
+  glass       GlassType
+  ingredients RecipePart[]
+  orders      Order[]
+  categories  Category[]
+}
+
+model Ingredient {
+  id         String       @id @default(uuid())
+  name       String       @unique
+  imageUrl   String       @default("https://res.cloudinary.com/dljchk64j/image/upload/c_thumb,w_200,g_face/v1667150402/cocktails/categories/classic_qv9cgx.png")
+  drinks     RecipePart[]
+  bartenders User[]
+}
+
+model RecipePart {
+  drink        Drink           @relation(fields: [drinkId], references: [id])
+  drinkId      String
+  ingredient   Ingredient      @relation(fields: [ingredientId], references: [id])
+  ingredientId String
+  amount       Decimal
+  unit         MeasurementUnit
+
+  @@id([drinkId, ingredientId])
+}
+
+model Order {
+  id        String      @id @default(uuid())
+  guestName String      @unique
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  drink     Drink       @relation(fields: [drinkId], references: [id])
+  drinkId   String
+  status    OrderStatus @default(Pending)
+  partyId   String
+  party     Party       @relation(fields: [partyId], references: [id])
+}
+
+model Category {
+  id       String  @id @default(uuid())
+  name     String  @unique
+  imageUrl String  @default("https://res.cloudinary.com/dljchk64j/image/upload/c_thumb,w_200,g_face/v1667150908/cocktails/ingredients/gin_iciv3k.png")
+  drinks   Drink[]
+}
+
+model Party {
+  id        String   @id @default(uuid())
+  name      String
+  endDate   DateTime
+  createdAt DateTime @default(now())
+  orders    Order[]
+  bartender User     @relation(fields: [userId], references: [id])
+  userId    String
+}
+
+model User {
+  id        String  @id @default(uuid())
+  email     String  @unique
+  password  String
+  firstName String?
+  lastName  String?
+  role      Role    @default(BARTENDER)
+
+  parties     Party[]
+  ingredients Ingredient[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+}
+
+enum Role {
+  ADMIN
+  BARTENDER
+}
+
+enum Color {
+  RED
+  GREEN
+  YELLOW
+  BLUE
+  ORANGE
+  BROWN
+  WHITE
+  PINK
+  PURPLE
+  BLACK
+}
+
+enum GlassType {
+  HIGH_BALL
+  LOW_BALL
+  MARTINI
+  MARGARITA
+  COUP
+}
+
+enum MeasurementUnit {
+  OZ
+  ML
+  DASH
+  SLICE
+  PEEL
+  WHOLE
+  SPOON
+}
+
+enum OrderStatus {
+  Pending
+  Received
+  Canceled
+  Done
+}
